@@ -70,8 +70,6 @@ public class UsuarioDAO {
         usuario.setIdade(resultSet.getInt("tst_idade"));
         usuarios.add(usuario);
         }
-                
-                
         
     }catch(SQLException erro){
         System.out.println("Falha na operação!");
@@ -83,7 +81,63 @@ public class UsuarioDAO {
         }
         return null;
     }
-
+    public Usuario listarPorId(int id){
+        Usuario usuario = new Usuario();
+        sql = "SELECT * FROM tb_teste WHERE tst_id = ?";
+        if(db.getConexao()){
+        try{
+            startment = db.conexao.prepareStatement(sql);
+            startment.setInt(1, id);
+            ResultSet resultSet = startment.executeQuery();
+            while(resultSet.next()){
+            usuario.setId(resultSet.getInt("tst_id"));
+            usuario.setNome(resultSet.getString("tst_nome"));
+            usuario.setIdade(resultSet.getInt("tst_idade"));
+            }
+        return usuario;
+        
+        }catch (SQLException erro){
+        System.out.println("Falha na operação!");
+        System.out.println("Erro: "+ erro);
+        return null;
+        }
+        
+        }
+        return null;
+    }
+    public List<Usuario> listarPorNome(String nome){
+        List<Usuario> usuarios = new ArrayList();
+        
+        sql = "SELECT * FROM tb_teste WHERE tst_nome LIKE ?";
+        nome = "%"+ nome+ "%";
+        if(db.getConexao()){
+            
+        try{
+            startment = db.conexao.prepareStatement(sql);
+            startment.setString(1, nome);
+            ResultSet resultSet = startment.executeQuery();
+            while(resultSet.next()){
+            Usuario usuario = new Usuario();
+            usuario.setId(resultSet.getInt("tst_id"));
+            usuario.setNome(resultSet.getString("tst_nome"));
+            usuario.setIdade(resultSet.getInt("tst_idade"));
+            usuarios.add(usuario);
+            }
+           resultSet.close();
+           startment.close();
+            return usuarios;
+           }catch(SQLException erro){
+            System.out.println("Falha na operação!");
+            System.out.println("Erro: "+ erro);
+            
+        }finally{
+        db.fechar();
+        }
+        }
+        return null;
+    
+    
+    }
     
     
 }

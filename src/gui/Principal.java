@@ -10,8 +10,8 @@ public class Principal {
     public static void main(String[] args) {
    
         UsuarioDAO dao = new UsuarioDAO();
-        Usuario usuario = new Usuario();
-        
+//        Usuario usuario = new Usuario();
+//        
 //        usuario.setNome(JOptionPane.showInputDialog("Nome do Usuário"));
 //        usuario.setIdade(Integer.parseInt(JOptionPane.showInputDialog("Idade do Usuário")));
 ////        dao.inserir(usuario);
@@ -22,12 +22,25 @@ public class Principal {
 //    JOptionPane.showMessageDialog(null, "falha");
 //    }
 //    
-        String texto = "";
-        for(Usuario u : dao.listarTudo()){
-        texto += u.getId() + " " + u.getNome() + " "  +u.getIdade() + " ";
-        JOptionPane.showMessageDialog(null, texto);
+//        String texto = "";
+//        for(Usuario u : dao.listarTudo()){
+//        texto += u.getId() + " " + u.getNome() + " "  +u.getIdade() + " ";
+//        JOptionPane.showMessageDialog(null, texto);
+//        
+//        }
+//    usuario = dao.listarPorId(6);
+//    if (usuario.getId() == 0){
+//        System.out.println("Usuario não encontrado");
+//    
+//    }else{
+//        System.out.println(usuario.toString());
+//    }
+//    
         
-        }
+        
+        for(Usuario usuario: dao.listarPorNome("iago")){
+        System.out.println(usuario.toString());}
     }
+    
     
 }
